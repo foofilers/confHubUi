@@ -1,3 +1,41 @@
-<div class="ui segment">
-  <h2>ConfHUB</h2>
+<div class="ui attached stackable menu">
+  <nav class="ui container">
+    <a class="item" routerLink="">
+      <i class="home icon"></i> Home
+    </a>
+    <a class="item" routerLink="/applications">
+      <i class="grid layout icon"></i> Applications
+    </a>
+    <div class="right item">
+      <div class="ui form" *ngIf="!isLogged()">
+        <div class="inline fields">
+          <div class="field">
+            <input type="text" [(ngModel)]="username" placeholder="Username"/>
+          </div>
+          <div class="field">
+            <input type="password" [(ngModel)]="password" placeholder="Password"/>
+          </div>
+          <div class="field">
+            <div class="ui icon blue button" (click)="onLogin()">
+              <i class="sign in icon"></i>
+              SignIn
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isLogged()">
+        Welcome {{userLogged.username}}
+        <div class="ui icon red button" (click)="onLogout()">
+          <i class="sign out icon"></i>
+          Logout
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="ui container">
+  <div class="ui basic segment">
+  <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,0 +1,41 @@
+<h3 class="ui  header">Applications</h3>
+<div class="ui  attached menu">
+  <div class="ui search item">
+    <div class="ui transparent icon input">
+      <input class="prompt" type="text" placeholder="Search applications...">
+      <i class="search link icon"></i>
+    </div>
+  </div>
+  <div class="right item" style="padding: 5px;">
+    <div class="ui form">
+      <div class="inline fields" style="margin: 0px;">
+        <div class="field">
+          <input type="text" placeholder="Application name" [(ngModel)]="newApp.name">
+        </div>
+        <div class="field">
+          <div class="ui green icon button" (click)="addApplication()">
+            <i class="add icon"></i>
+            Add Application
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui attached segment">
+  <div class="ui relaxed divided list">
+    <div class="item" *ngFor="let app of applications">
+      <div class="right floated content">
+        <div class="ui red icon button">
+          <i class="ui trash icon"></i>
+          Delete
+        </div>
+      </div>
+      <i class="large settings middle aligned icon"></i>
+      <div class="content">
+        <a class="header" [routerLink]="[app.name]">{{app.name}}</a>
+        <div class="description">{{app.createdAt}}</div>
+      </div>
+    </div>
+  </div>
+</div>
