@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {AuthService} from "./services/auth.service";
-import {LocalStorageService} from "angular-2-local-storage";
 import {JwtHelper} from "angular2-jwt";
+import {ErrorService} from "./services/error.service";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,6 @@ import {JwtHelper} from "angular2-jwt";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
 
   private username: string = null;
   private password: string = null;
@@ -45,4 +44,6 @@ export class AppComponent implements OnInit {
     this.userLogged = null;
     localStorage.removeItem("token");
   }
+
+
 }

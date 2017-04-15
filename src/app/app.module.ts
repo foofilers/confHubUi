@@ -13,13 +13,18 @@ import {LocalStorageModule} from "angular-2-local-storage";
 import {ApplicationsComponent} from './components/applications/applications.component';
 import {ApplicationsService} from "./services/applications.service";
 import { ApplicationComponent } from './components/application/application.component';
+import {ErrorService} from "./services/error.service";
+import {ErrorMessageComponent} from "./components/error-message/error-message.component";
+import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ApplicationsComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    ErrorMessageComponent,
+    YesNoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,7 @@ import { ApplicationComponent } from './components/application/application.compo
     }),
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [AuthService, ApplicationsService],
+  providers: [AuthService, ApplicationsService,ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
