@@ -1,8 +1,11 @@
+<div class="ui "style="margin-top:20px;">
 <h3 class="ui  header">Applications</h3>
+<app-safe-dialog [show]="openDelete" [title]="deleteTitle" [message]="deleteMessage" [data]="appToDelete" [safe-message]="appToDeleteConfirm" (no)="openDelete=false;" (yes)="confirmAppDelete($event);openDelete=false;"></app-safe-dialog>
+
 <div class="ui  attached menu">
   <div class="ui search item">
     <div class="ui transparent icon input">
-      <input class="prompt" type="text" placeholder="Search applications...">
+      <input class="prompt" type="text" placeholder="Search applications..." [(ngModel)]="filterApplication">
       <i class="search link icon"></i>
     </div>
   </div>
@@ -22,11 +25,12 @@
     </div>
   </div>
 </div>
+
 <div class="ui attached segment">
-  <div class="ui relaxed divided list">
-    <div class="item" *ngFor="let app of applications">
+  <div class="ui relaxed divided list" >
+    <div  class="item" *ngFor="let app of applications | filterBy:{name:filterApplication}">
       <div class="right floated content">
-        <div class="ui red icon button">
+        <div class="ui red icon button" (click)="deleteApplication(app)">
           <i class="ui trash icon"></i>
           Delete
         </div>
@@ -38,4 +42,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

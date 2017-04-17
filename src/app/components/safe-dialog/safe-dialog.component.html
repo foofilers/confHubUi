@@ -8,10 +8,13 @@
     </div>
     <div class="description">
       {{message}}
+    <div class="ui form">
+      <input type="text" [(ngModel)]="confirm">
+    </div>
     </div>
   </div>
   <div class="actions">
-    <div class="ui button" (click)="onYes()">Yes</div>
+    <div class="ui button" (click)="onYes()" [ngClass]="{disabled: confirm!=safeMessage}">Yes</div>
     <div class="ui button" (click)="onNo()">No</div>
   </div>
 </div>

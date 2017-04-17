@@ -2,19 +2,23 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 declare var $: any;
 
 @Component({
-  selector: 'app-yes-no-dialog',
-  templateUrl: './yes-no-dialog.component.html',
+  selector: 'app-safe-dialog',
+  templateUrl: './safe-dialog.component.html',
 })
-export class YesNoDialogComponent {
+export class SafeDialogComponent implements OnInit {
 
   @Output() yes: EventEmitter<any> = new EventEmitter();
   @Output() no: EventEmitter<any> = new EventEmitter();
   @Input() title: string;
   @Input() message: string;
   @Input() data: any;
+  @Input("safe-message") safeMessage:string;
   @ViewChild('modal') modal: ElementRef;
 
-  constructor() {
+  private confirm: string;
+  constructor() { }
+
+  ngOnInit() {
   }
 
   @Input()

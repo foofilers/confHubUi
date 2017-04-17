@@ -1,0 +1,34 @@
+<div class="ui attached menu">
+  <div class="ui search item">
+    <div class="ui transparent icon input">
+      <input class="prompt" type="text" placeholder="Search versions..." [(ngModel)]="filterVersion">
+      <i class="search link icon"></i>
+    </div>
+  </div>
+  <div class="right item" style="padding: 5px;">
+    <div class="ui form">
+      <div class="inline fields" style="margin: 0px;">
+        <div class="field">
+          <input type="text" placeholder="Version" [(ngModel)]="newVersion">
+        </div>
+        <div class="field">
+          <div class="ui green icon button" (click)="addVersion()">
+            <i class="add icon"></i>
+            Add Version
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui attached segment">
+  <div class="ui relaxed divided list">
+    <div class="item" app-version *ngFor="let ver of versions | filterBy:filterVersion"
+         [application]="currApplication.name"
+         [(defaultVersion)]="defaultVersion"
+         [version]="ver"
+         (deleted)="refresh()"
+         (defaultChanged)="refresh()"
+         (copied)="refresh()"></div>
+  </div>
+</div>

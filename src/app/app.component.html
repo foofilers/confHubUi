@@ -1,14 +1,23 @@
 <div class="ui attached stackable menu">
   <nav class="ui container">
+    <h2 class="ui header" style="margin: 0px;">
+      <div class="content">
+        ConfHub
+        <div class="sub header" style="font-size: 0.5em;">www.foofilers.com</div>
+      </div>
+    </h2>
     <a class="item" routerLink="">
       <i class="home icon"></i> Home
     </a>
-    <a class="item" routerLink="/applications">
+    <a class="item no-padding-top-bottom" routerLink="/applications" *ngIf="isLogged()">
       <i class="grid layout icon"></i> Applications
     </a>
-    <div class="right item">
-      <div class="ui form" *ngIf="!isLogged()">
-        <div class="inline fields">
+    <a class="item no-padding-top-bottom" routerLink="/applications" *ngIf="isLogged()">
+      <i class="users icon"></i> Users
+    </a>
+    <div class="right item no-padding-top-bottom">
+      <div class="ui form" *ngIf="!isLogged()" >
+        <div class="inline fields" style="margin: 0px;">
           <div class="field">
             <input type="text" [(ngModel)]="username" placeholder="Username"/>
           </div>
@@ -24,11 +33,8 @@
         </div>
       </div>
       <div *ngIf="isLogged()">
-        Welcome {{userLogged.username}}
-        <div class="ui icon red button" (click)="onLogout()">
-          <i class="sign out icon"></i>
-          Logout
-        </div>
+        <i class="ui user icon"></i> {{userLogged.username}}
+        <i class="sign out icon link " (click)="onLogout()" title="Logout"></i>
       </div>
     </div>
   </nav>
@@ -36,7 +42,7 @@
 
 <div class="ui container">
   <app-error-message></app-error-message>
-  <div class="ui basic segment">
+  <div class="basic segment">
     <router-outlet></router-outlet>
   </div>
 </div>

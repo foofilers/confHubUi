@@ -1,0 +1,7 @@
+<div class="ui breadcrumb attached">
+  <ng-container *ngFor="let path of paths;let i = index">
+    <a class="section" [routerLink]="path">{{names[i]}}</a>
+    <i class="right angle icon divider"></i>
+  </ng-container>
+  <b class="section">{{names[names.length-1]}}</b>
+</div>

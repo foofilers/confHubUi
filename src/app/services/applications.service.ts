@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {AuthHttp} from "angular2-jwt";
 import {Headers} from "@angular/http";
+import {ErrorService} from "./error.service";
 
 @Injectable()
 export class ApplicationsService {
@@ -11,16 +12,14 @@ export class ApplicationsService {
 
   listApplications() {
     return this.http.get(environment.apiUrl + "apps/")
-      .toPromise()
-      .then(res => res.json())
-      .catch(this.handleError);
+      .map(res => res.json());
+
   }
 
   get(name: any) {
     return this.http.get(environment.apiUrl + "apps/" + name)
-      .toPromise()
-      .then(res => res.json())
-      .catch(this.handleError);
+      .map(res => res.json())
+      .catch(ErrorService.handleError);
   }
 
   addApplication(app: any) {
@@ -29,14 +28,13 @@ export class ApplicationsService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     var body = "name=" + app.name;
     return this.http.post(environment.apiUrl + "apps", body, {headers: headers})
-      .toPromise()
-      .catch(this.handleError);
+      .catch(ErrorService.handleError);
   }
 
 
-  private handleError(error: any): Promise<any> {
-    console.error("An error occured on ApplicationsService", error);
-    return Promise.reject(error.message || error);
+  delete(name: string) {
+    return this.http.delete(environment.apiUrl + "apps/" + name)
+      .catch(ErrorService.handleError);
   }
 
 

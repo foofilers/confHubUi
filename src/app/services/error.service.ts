@@ -11,4 +11,9 @@ export class ErrorService {
     this.error.emit(new Error(title,description));
   }
 
+
+  public static handleError(error: any): Promise<any> {
+    console.error("An error occured", error);
+    return Promise.reject(error.message || error);
+  }
 }

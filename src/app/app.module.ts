@@ -12,10 +12,20 @@ import {AuthModule} from "./authModule/auth.module";
 import {LocalStorageModule} from "angular-2-local-storage";
 import {ApplicationsComponent} from './components/applications/applications.component';
 import {ApplicationsService} from "./services/applications.service";
-import { ApplicationComponent } from './components/application/application.component';
+import {ApplicationComponent} from './components/application/application.component';
 import {ErrorService} from "./services/error.service";
 import {ErrorMessageComponent} from "./components/error-message/error-message.component";
-import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.component';
+import {ConfigService} from "./services/config.service";
+import {VersionService} from "./services/version.service";
+import { VersionsComponent } from './components/versions/versions.component';
+import { ConfigsComponent } from './components/configs/configs.component';
+import { ConfigComponent } from './components/config/config.component';
+import { KeysPipe } from './pipes/keys.pipe';
+import { SafeDialogComponent } from './components/safe-dialog/safe-dialog.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { FilterByPipe } from './pipes/filter-by.pipe';
+import { VersionComponent } from './components/version/version.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +35,15 @@ import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.c
     ApplicationComponent,
     ErrorMessageComponent,
     YesNoDialogComponent,
+    VersionsComponent,
+    ConfigsComponent,
+    ConfigComponent,
+    KeysPipe,
+    SafeDialogComponent,
+    BreadcrumbComponent,
+    FilterByPipe,
+    VersionComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +56,7 @@ import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.c
     }),
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [AuthService, ApplicationsService,ErrorService],
+  providers: [AuthService, ApplicationsService, ErrorService, ConfigService, VersionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

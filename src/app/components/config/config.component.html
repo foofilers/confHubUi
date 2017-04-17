@@ -1,0 +1,33 @@
+<td class="collapsing">
+  <div class="ui checkbox">
+    <input type="checkbox" name="selApp" (change)="selConfig()"><label></label>
+  </div>
+</td>
+<td>
+  <input type="text" name="propName" [(ngModel)]="propName" *ngIf="editing">
+  <span *ngIf="!editing">{{propName}}</span>
+</td>
+<td>
+  <input type="text" name="propValue" [(ngModel)]="propValue" *ngIf="editing">
+  <span *ngIf="!editing">{{propValue}}</span>
+</td>
+<td class="collapsing">
+  <div class="ui blue icon button" (click)="editing=true" *ngIf="!editing">
+    <i class="ui edit icon"></i>
+    Edit
+  </div>
+  <div class="ui red icon button" (click)="delete()" *ngIf="!editing">
+    <i class="ui trash icon"></i>
+    Delete
+  </div>
+  <div class="ui icon button" (click)="save()" *ngIf="editing" >
+    <i class="ui save icon"></i>
+    Save
+  </div>
+  <div class="ui icon button" (click)="editing=false" *ngIf="editing">
+    <i class="ui cancel icon"></i>
+    Cancel
+  </div>
+</td>
+
+
