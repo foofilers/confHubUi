@@ -14,9 +14,11 @@ export class VersionComponent implements OnInit, OnDestroy {
   @Input() application: string;
   @Input() version: string;
   @Input() defaultVersion: string;
+  @Input() currCompare: string;
   @Output() defaultVersionChange: EventEmitter<string> = new EventEmitter();
   @Output() deleted: EventEmitter<string> = new EventEmitter();
   @Output() copied: EventEmitter<string> = new EventEmitter();
+  @Output() compared: EventEmitter<string> = new EventEmitter();
 
 
   verToDelete: string;
@@ -40,8 +42,8 @@ export class VersionComponent implements OnInit, OnDestroy {
 
   setDefaultVersion() {
     this.subscriptions.push(this.versionService.setDefaultVersion(this.application, this.version)
-      .subscribe(() => this.defaultVersionChange.emit(this.version),
-        error => this.errorService.showError("Error setting default version", error)));
+    .subscribe(() => this.defaultVersionChange.emit(this.version),
+      error => this.errorService.showError("Error setting default version", error)));
   }
 
   deleteVersion() {
@@ -54,16 +56,20 @@ export class VersionComponent implements OnInit, OnDestroy {
 
   confirmVerDelete() {
     this.subscriptions.push(this.versionService.delete(this.application, this.version)
-      .subscribe(() => this.deleted.emit(this.version),
-        error => this.errorService.showError("Error deleting application", error)));
+    .subscribe(() => this.deleted.emit(this.version),
+      error => this.errorService.showError("Error deleting application", error)));
   }
 
   copy() {
     this.subscriptions.push(this.versionService.copy(this.application, this.version, this.destCopyVersion)
-      .subscribe(
-        () => this.copied.emit(this.destCopyVersion),
-        error => this.errorService.showError("Error copying version", error)
-      ));
+    .subscribe(
+      () => this.copied.emit(this.destCopyVersion),
+      error => this.errorService.showError("Error copying version", error)
+    ));
+  }
+
+  compare() {
+    this.compared.emit(this.version);
   }
 
   ngOnDestroy(): void {

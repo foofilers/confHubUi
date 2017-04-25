@@ -19,13 +19,16 @@ import {YesNoDialogComponent} from './components/yes-no-dialog/yes-no-dialog.com
 import {ConfigService} from "./services/config.service";
 import {VersionService} from "./services/version.service";
 import { VersionsComponent } from './components/versions/versions.component';
-import { ConfigsComponent } from './components/configs/configs.component';
 import { ConfigComponent } from './components/config/config.component';
 import { KeysPipe } from './pipes/keys.pipe';
 import { SafeDialogComponent } from './components/safe-dialog/safe-dialog.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { VersionComponent } from './components/version/version.component';
+import {EditConfigsComponent} from "./components/edit-configs/edit-configs.component";
+import { ViewConfigsComponent } from './components/view-configs/view-configs.component';
+import {PrettyJsonModule} from 'angular2-prettyjson';
+import { CompareConfigsComponent } from './components/compare-configs/compare-configs.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +39,15 @@ import { VersionComponent } from './components/version/version.component';
     ErrorMessageComponent,
     YesNoDialogComponent,
     VersionsComponent,
-    ConfigsComponent,
+    EditConfigsComponent,
     ConfigComponent,
     KeysPipe,
     SafeDialogComponent,
     BreadcrumbComponent,
     FilterByPipe,
-    VersionComponent
+    VersionComponent,
+    ViewConfigsComponent,
+    CompareConfigsComponent
 
   ],
   imports: [
@@ -50,6 +55,7 @@ import { VersionComponent } from './components/version/version.component';
     FormsModule,
     HttpModule,
     AuthModule,
+    PrettyJsonModule,
     LocalStorageModule.withConfig({
       prefix: 'confHub',
       storageType: 'localStorage'

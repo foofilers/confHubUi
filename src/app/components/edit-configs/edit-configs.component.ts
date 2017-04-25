@@ -1,14 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ErrorService} from "../../services/error.service";
 import {ConfigService} from "../../services/config.service";
 import {Subscription} from "rxjs";
+declare var $: any;
 
 @Component({
-  selector: 'app-configs',
-  templateUrl: './configs.component.html',
+  selector: 'app-edit-configs',
+  templateUrl: './edit-configs.component.html',
 })
-export class ConfigsComponent implements OnInit, OnDestroy {
+export class EditConfigsComponent implements OnInit, OnDestroy {
+
 
   private configSelected: Set<string> = new Set();
 
@@ -19,7 +21,7 @@ export class ConfigsComponent implements OnInit, OnDestroy {
   newProp: string;
   newValue: string;
   filterProp: string;
-  filterValue:string;
+  filterValue: string;
 
   constructor(private router: ActivatedRoute, private configService: ConfigService, private errorService: ErrorService) {
   }
@@ -32,18 +34,20 @@ export class ConfigsComponent implements OnInit, OnDestroy {
     }));
   }
 
+
+
   refresh() {
     console.log("Loading configuration for", this.appName, this.version);
     this.subscriptions.push(this.configService.getConfig(this.appName, this.version)
-      .subscribe(
-        confs => this.configs = confs,
-        error => this.errorService.showError("Error retrieving configurations", error)));
+    .subscribe(
+      confs => this.configs = confs,
+      error => this.errorService.showError("Error retrieving configurations", error)));
   }
 
   addProperty() {
     this.subscriptions.push(this.configService.putConfig(this.appName, this.version, this.newProp, this.newValue)
-      .subscribe(() => this.refresh(),
-        error => this.errorService.showError("Error adding configuration", error)));
+    .subscribe(() => this.refresh(),
+      error => this.errorService.showError("Error adding configuration", error)));
   }
 
   selConfig(propName: string) {

@@ -1,28 +1,47 @@
-<app-safe-dialog [show]="openDelete" [title]="deleteTitle" [message]="deleteMessage" [data]="verToDelete" [safe-message]="verToDeleteConfirm" (no)="openDelete=false;" (yes)="confirmVerDelete($event);openDelete=false;"></app-safe-dialog>
-  <div class="ui right floated content small form" >
-    <div class="ui blue icon button" (click)="copying=true" *ngIf="!copying">
-      <i class="ui copy icon"></i>
-      Copy
+<app-safe-dialog [show]="openDelete" [title]="deleteTitle" [message]="deleteMessage"
+                 [data]="verToDelete" [safe-message]="verToDeleteConfirm" (no)="openDelete=false;"
+                 (yes)="confirmVerDelete($event);openDelete=false;"></app-safe-dialog>
+<div class="ui right floated content small form">
+
+  <div class="ui icon button" [routerLink]="[version,'view']" *ngIf="!copying">
+    <i class="ui browser icon"></i>
+    View
+  </div>
+  <div class="ui orange icon button" [routerLink]="[version,'edit']" *ngIf="!copying">
+    <i class="ui edit icon"></i>
+    Edit
+  </div>
+
+  <div class="ui blue icon button" (click)="copying=true" *ngIf="!copying">
+    <i class="ui copy icon"></i>
+    Copy
+  </div>
+  <div class="inline field" *ngIf="copying">
+    <input class="small input" type="text" name="newVer" [(ngModel)]="destCopyVersion">
+    <div class="ui icon button" (click)="copy();copying=false;">
+      <i class="ui copy icon"></i>Copy
     </div>
-      <div class="inline field" *ngIf="copying">
-        <input class="small input" type="text" name="newVer" [(ngModel)]="destCopyVersion">
-        <div class="ui icon button" (click)="copy();copying=false;">
-          <i class="ui copy icon"></i>Copy
-        </div>
-        <div class="ui icon button" (click)="copying=false">
-          <i class="ui cancel icon"></i>Cancel
-        </div>
-      </div>
-    <div class="ui green icon button" (click)="setDefaultVersion()" *ngIf="!isDefaultVersion(ver)">
-      <i class="ui target icon"></i>
-      Set Default
-    </div>
-    <div class="ui red icon button" (click)="deleteVersion()">
-      <i class="ui trash icon"></i>
-      Delete
+    <div class="ui icon button" (click)="copying=false">
+      <i class="ui cancel icon"></i>Cancel
     </div>
   </div>
-  <i class="large tag middle aligned icon" [ngClass]="{green: isDefaultVersion()}"></i>
-  <div class="content">
-    <a class="header" [routerLink]="[version]">{{version}}</a>
+  <div class="ui green icon button" (click)="setDefaultVersion()"
+       [ngClass]="{disabled: isDefaultVersion(ver)}">
+    <i class="ui target icon"></i>
+    Default
   </div>
+
+  <div class="ui red icon button" (click)="compare()">
+    <i class="ui map sign icon"></i>
+    Compare<span *ngIf="currCompare!=null"> with {{currCompare}}</span>
+  </div>
+
+  <div class="ui red icon button" (click)="deleteVersion()" *ngIf="!copying">
+    <i class="ui trash icon"></i>
+    Delete
+  </div>
+</div>
+<i class="large tag middle aligned icon" [ngClass]="{green: isDefaultVersion()}"></i>
+<div class="content">
+  <a class="header">{{version}}</a>
+</div>

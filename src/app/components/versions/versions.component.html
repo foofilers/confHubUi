@@ -27,8 +27,11 @@
          [application]="currApplication.name"
          [(defaultVersion)]="defaultVersion"
          [version]="ver"
+         [currCompare]="currCompare"
          (deleted)="refresh()"
          (defaultChanged)="refresh()"
-         (copied)="refresh()"></div>
+         (copied)="refresh()"
+         (compared)="compare($event)"
+    ></div>
   </div>
 </div>

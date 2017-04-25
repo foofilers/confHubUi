@@ -12,9 +12,15 @@ export class ConfigService {
   }
 
   getConfig(appName, version: string) {
-    return this.http.get(environment.apiUrl + "configs/" + appName + "/" + version)
-      .map(res => res.json())
-      .catch(ErrorService.handleError);
+    return this.http.get(environment.apiUrl + "configs/" + appName + "/" + version + "?reference=false")
+    .map(res => res.json())
+    .catch(ErrorService.handleError);
+  }
+
+  getFormattedConfig(appName, version, format: string) {
+    return this.http.get(environment.apiUrl + "configs/" + appName + "/" + version + "?reference=true&format=" + format)
+    .map(res => res.text())
+    .catch(ErrorService.handleError);
   }
 
   putConfig(appName: string, version: string, prop: string, value: string) {
@@ -30,15 +36,15 @@ export class ConfigService {
       body += "&key=" + newProp;
     }
     return this.http.put(environment.apiUrl + "values/" + appName + "/" + version + "/" + origProp, body, {headers: headers})
-      .map(res => res.json())
-      .catch(ErrorService.handleError);
+    .map(res => res.json())
+    .catch(ErrorService.handleError);
   }
 
   delete(appName, version, prop: string) {
     console.log("Delete prop" + appName + "-" + version + "-" + prop);
     return this.http.delete(environment.apiUrl + "values/" + appName + "/" + version + "/" + prop)
-      .map(res => res.json())
-      .catch(ErrorService.handleError);
+    .map(res => res.json())
+    .catch(ErrorService.handleError);
   }
 
 

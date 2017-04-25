@@ -1,0 +1,30 @@
+<app-breadcrumb [names]="['applications',appName,version]"
+                [paths]="['/applications','/applications/'+appName]"></app-breadcrumb>
+<h2 class="ui header">
+  <i class="settings icon"></i>
+  <div class="content">
+    {{appName}}
+    <div class="sub header">version: {{version}}</div>
+  </div>
+</h2>
+<h3>View Configuration</h3>
+<div class="ui attached menu">
+  <div class="ui dropdown item" >
+    <i class="download icon"></i>
+    <div class="menu">
+      <div class="item" (click)="downloadConfig('json')">JSON</div>
+      <div class="item" (click)="downloadConfig('flatJson')">FLAT JSON</div>
+      <div class="item" (click)="downloadConfig('yaml')">YAML</div>
+      <div class="item" (click)="downloadConfig('xml')">XML</div>
+      <div class="item" (click)="downloadConfig('flatXml')">FLAT XML</div>
+    </div>
+  </div>
+  <div class="ui button item" [routerLink]="['../','edit']">
+    <i class="ui edit icon"></i>
+    Edit
+  </div>
+
+</div>
+<div class="ui attached segment">
+  <pre [innerHtml]="config | prettyjson:4"></pre>
+</div>
